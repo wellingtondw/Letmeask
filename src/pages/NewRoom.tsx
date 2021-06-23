@@ -23,7 +23,6 @@ export function NewRoom() {
             <Button type="submit">Criar sala</Button>
           </form>
           <p className="existing-room">Quer entrar em uma sala existente? <Link to='/'>clique aqui</Link></p>
-
         </div>
       </main>
     </div>
