@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useParams } from 'react-router'
 import logoImg from '../assets/images/logo.svg'
 import { Button } from '../components/Button'
@@ -9,8 +9,6 @@ import { useRoom } from '../hooks/useRoom'
 import { database } from '../services/firebase'
 
 import '../styles/room.scss'
-
-
 
 type RoomParams = {
   id: string
