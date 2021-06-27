@@ -1,4 +1,4 @@
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 
 import logoImg from '../assets/images/logo.svg'
 import deleteImg from '../assets/images/delete.svg'
@@ -6,7 +6,7 @@ import deleteImg from '../assets/images/delete.svg'
 import { Button } from '../components/Button'
 import { Question } from '../components/Question'
 import { RoomCode } from '../components/RoomCode'
-import { useAuth } from '../contexts/AuthContext'
+// import { useAuth } from '../contexts/AuthContext'
 import { useRoom } from '../hooks/useRoom'
 
 import '../styles/room.scss'
@@ -18,9 +18,17 @@ type RoomParams = {
 
 export function AdminRoom() {
   const { id: roomId } = useParams<RoomParams>()
-  const { user } = useAuth()
+  const history = useHistory()
+  // const { user } = useAuth()
   const { title, questions } = useRoom(roomId)
   
+  async function handleDeleteRoom() {
+    await database.ref(`rooms/${roomId}`).update({
+      closedAt: new Date()
+    })
+
+    history.push('/')
+  }
 
   async function handleDeleteQuestion(questionId: string) {
     const confirm = window.confirm('Tem certeza que deseja excluir essa pergunta?')
@@ -37,7 +45,7 @@ export function AdminRoom() {
           <img src={logoImg} alt="Letmeask"/>
           <div>
             <RoomCode code={roomId}/>
-            <Button>Encerrar sala</Button>
+            <Button onClick={handleDeleteRoom}>Encerrar sala</Button>
           </div>
         </div>
       </header>
