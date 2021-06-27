@@ -40,7 +40,9 @@ export function AdminRoom() {
         
         <div className="questions-list">
           {questions.map(question => (
-            <Question key={question.id} content={question.content} author={question.author}/>
+            <Question key={question.id} content={question.content} author={question.author}>
+              
+            </Question>
           ))}
         </div>
       </main>
